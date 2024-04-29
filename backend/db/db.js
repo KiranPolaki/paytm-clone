@@ -2,9 +2,13 @@ import mongoose from "mongoose";
 
 import { DB_NAME, MONGO_URL } from "../config";
 
-// (async function () {
-//   await mongoose.connect(`${MONGO_URL}${DB_NAME}`);
-// })();
+(async function () {
+  try {
+    await mongoose.connect(`${MONGO_URL}${DB_NAME}`);
+  } catch (err) {
+    console.log("cant connect to DB");
+  }
+})();
 
 // TODO: Make sure user know this rules while login/signup (add instructions/alerts)
 const userSchema = new mongoose.Schema(

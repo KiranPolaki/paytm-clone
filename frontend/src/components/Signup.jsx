@@ -1,7 +1,7 @@
 export function Signup() {
   return (
     <>
-      <div className="flex flex-col bg-white text-black w-80 h-2/4 p-3.5">
+      <div className="flex flex-col justify-center items-center bg-white text-black w-80 h-2/4 p-3.5">
         <div>
           <h1>Create an account</h1>
           <p>Enter your information to enjoy seemless payments!</p>
