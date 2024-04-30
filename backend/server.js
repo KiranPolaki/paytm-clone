@@ -1,16 +1,24 @@
 import express from "express";
-import { PORT } from "./config";
+import cors from "cors";
+import PORT from "./config.js";
+
+import mainRouter from "./routes/index.js";
 
 const app = express();
 
-app.use(express.json());
+app.use(cors());
+app.use(express());
 
-app.get((req, res) => {});
+app.use("/api/v1", mainRouter);
 
-app.post((req, res) => {});
-
-app.put((req, res) => {});
-
-app.listen(PORT, () => {
-  console.log(`Listening at port http://localhost:${PORT}`);
+app.listen(PORT || 3000, () => {
+  console.log("Litening");
 });
+
+// Basically this is how the requests are going to look
+//  /api/v1/user/signup
+//  /api/v1/user/signin
+//  /api/v1/user/changePassword
+
+//  /api/v1/account/transferMoney
+//  /api/v1/account/balance
