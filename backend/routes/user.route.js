@@ -16,6 +16,7 @@ router.post("/signup", (req, res) => {
   const password = req.body?.password;
   const userRes = usernameSchema.safeParse(username);
   const firstnameRes = firstnameSchema.safeParse(firstname);
+  const lastnameRes = lastnameSchema.safeParse(lastname);
 });
 // router.get("/signup", (req, res) => {});
 // router.get("/signup", (req, res) => {});
