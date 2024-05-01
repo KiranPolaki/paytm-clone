@@ -43,6 +43,18 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const accountSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: "String",
+    },
+    balance: {
+      type: "String",
+    },
+  },
+  { timestamps: true }
+);
+
 const User = mongoose.model("User", userSchema);
 
 export { User };
