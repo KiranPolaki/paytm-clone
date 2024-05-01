@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import zod from "zod";
 import { User } from "../db/db.js";
 import { JWT_SECRET } from "../config.js";
+import { authMiddleware } from "../middleware/middleware.js";
 
 const router = Router();
 
@@ -87,6 +88,57 @@ router.post("/signin", async (req, res) => {
   }
   res.status(411).json({
     message: "Error while Login try again, user doesnt exist/ creds invalid",
+  });
+});
+
+const updateBody = zod.object({
+  password: zod.string().optional(),
+  firstname: zod.string().optional(),
+  lastname: zod.string().optional(),
+});
+router.put("/", authMiddleware, async (req, res) => {
+  const { success } = updateBody.safeParse(req.body);
+  if (!success) {
+    res.status(411).json({
+      message: "Error wwhile updating information",
+    });
+  }
+
+  await User.updateOne(
+    {
+      _id: req.userId,
+    },
+    req.body
+  );
+
+  res.json({
+    message: "Updated Successfully!",
+  });
+});
+
+router.get("/bulk", async (req, res) => {
+  const filter = req.query.filter || "";
+  const users = await res.find({
+    $or: [
+      {
+        firstname: {
+          $regex: filter,
+        },
+      },
+      {
+        lastname: {
+          $regex: filter,
+        },
+      },
+    ],
+  });
+  res.json({
+    users: users.map((user) => ({
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      _id: user._id,
+    })),
   });
 });
 
