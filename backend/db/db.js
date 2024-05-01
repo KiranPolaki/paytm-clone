@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-import { DB_NAME, MONGO_URL } from "../config";
+import { DB_NAME, MONGO_URL } from "../config.js";
 
 (async function () {
   try {
     await mongoose.connect(`${MONGO_URL}${DB_NAME}`);
+    console.log("⚙️  Mongo is connected!");
   } catch (err) {
     console.log("cant connect to DB");
   }
@@ -13,7 +14,7 @@ import { DB_NAME, MONGO_URL } from "../config";
 // TODO: Make sure user know this rules while login/signup (add instructions/alerts)
 const userSchema = new mongoose.Schema(
   {
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -35,9 +36,8 @@ const userSchema = new mongoose.Schema(
       maxLength: 50,
     },
     password: {
-      type: password,
+      type: "String",
       required: true,
-      minLength: 6,
     },
   },
   { timestamps: true }
