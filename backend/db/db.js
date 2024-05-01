@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import { DB_NAME, MONGO_URL } from "../config.js";
+import { Schema } from "zod";
 
 (async function () {
   try {
@@ -46,15 +47,19 @@ const userSchema = new mongoose.Schema(
 const accountSchema = new mongoose.Schema(
   {
     userId: {
-      type: "String",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     balance: {
       type: "String",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
+const Account = mongoose.model("Account", accountSchema);
 
-export { User };
+export { User, Account };
