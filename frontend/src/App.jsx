@@ -1,11 +1,20 @@
+/* eslint-disable no-unused-vars */
 import "./App.css";
-import { Signup } from "./components/Signup";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from "./components/Signup.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import SendMoney from "./components/SendMoney.jsx";
 
 function App() {
   return (
-    <div className=" w-full h-screen bg-zinc-800 text-white">
-      <Signup />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/send" element={<SendMoney />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
