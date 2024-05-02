@@ -1,7 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import zod from "zod";
-import { User } from "../db/db.js";
+import { Account, User } from "../db/db.js";
 import { JWT_SECRET } from "../config.js";
 import { authMiddleware } from "../middleware/middleware.js";
 
@@ -53,6 +53,12 @@ router.post("/signup", async (req, res) => {
     lastname: req.body?.lastname,
   });
   const userId = user._id;
+  // * default income on signup
+  // TODO: Lets make this a little bit fun by asking properties and giving credit
+  await Account.create({
+    userId,
+    balance: 1 + Math.random() * 10000,
+  });
   // * JsonWebTokens create a token fro Auth
   const token = jwt.sign(
     {
