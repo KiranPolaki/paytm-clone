@@ -4,7 +4,7 @@ function Dashboard() {
       <div className="w-1/2 h-full flex items-center flex-col">
         <div className="w-full h-1/5">Welcome to Paytm V01</div>
         <div className="w-full flex gap-1 h-2/5">
-          <input type="search" className="w-9/12" />
+          <input type="search" className="w-9/12 h-auto" />
           <button className="w-1/5">search</button>
         </div>
         <div className="flex w-full h-2/5 items-center justify-center">
