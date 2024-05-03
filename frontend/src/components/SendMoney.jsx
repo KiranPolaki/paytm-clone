@@ -1,5 +1,5 @@
 function SendMoney() {
-  return <div></div>;
+  return <div>send money</div>;
 }
 
-export default SendMoney;
+export { SendMoney };

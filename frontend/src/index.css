@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dashboard-container {
+  background-color: #efecec;
+}
+
+/* color #FC6736 */
+/* color #0C2D57 */
