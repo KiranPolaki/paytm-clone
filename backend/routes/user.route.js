@@ -140,6 +140,7 @@ router.get("/bulk", authMiddleware, async (req, res) => {
   try {
     const filter = req.query.filter || "";
     const users = await User.find({
+      _id: { $ne: req.userId },
       $or: [
         {
           firstname: {
