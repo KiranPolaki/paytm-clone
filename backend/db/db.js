@@ -8,7 +8,7 @@ import { Schema } from "zod";
     await mongoose.connect(`${MONGO_URL}${DB_NAME}`);
     console.log("⚙️  Mongo is connected!");
   } catch (err) {
-    console.log("cant connect to DB");
+    console.log("Error connecting to DB :( ", err);
   }
 })();
 
@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: "String",
-      required: true,
+      required: [true, "Password is required"],
     },
   },
   { timestamps: true }
@@ -52,7 +52,7 @@ const accountSchema = new mongoose.Schema(
       required: true,
     },
     balance: {
-      type: "String",
+      type: Number,
       required: true,
     },
   },
